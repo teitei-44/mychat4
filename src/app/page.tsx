@@ -1,69 +1,119 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  FileDownIcon,
+  Grid3x3Icon,
+  ListChecksIcon,
+  TargetIcon,
+} from "lucide-react";
+import { getCurrentUser } from "@/lib/auth";
+import { SiteHeader } from "@/components/site-header";
+import { Button } from "@/components/ui/button";
 
-export default function Home() {
+const features = [
+  {
+    icon: TargetIcon,
+    title: "핵심 목표 하나",
+    body: "표의 한가운데에 이루고 싶은 단 하나의 목표를 적습니다.",
+  },
+  {
+    icon: Grid3x3Icon,
+    title: "세부 목표 8개",
+    body: "핵심 목표를 둘러싼 8칸에 목표를 이루기 위한 요소를 적으면 바깥 블록 가운데에 자동으로 옮겨집니다.",
+  },
+  {
+    icon: ListChecksIcon,
+    title: "실천 과제 64개",
+    body: "각 세부 목표마다 오늘 바로 할 수 있는 행동 8개를 채웁니다.",
+  },
+  {
+    icon: FileDownIcon,
+    title: "이미지·PDF 저장",
+    body: "완성한 만다라트를 PNG 이미지나 A4 PDF로 저장해 책상 앞에 붙여 두세요.",
+  },
+];
+
+// 랜딩 미리보기용 3×3 (가운데 블록)
+const preview = [
+  "건강",
+  "공부",
+  "관계",
+  "재정",
+  "올해의 목표",
+  "취미",
+  "커리어",
+  "습관",
+  "마음",
+];
+
+export default async function Home() {
+  const user = await getCurrentUser();
+  const startHref = user ? "/mandalarts/new" : "/signup";
+
   return (
-    <div className="flex flex-1 flex-col items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex w-full max-w-3xl flex-1 flex-col items-center justify-between bg-white px-16 py-32 sm:items-start dark:bg-black">
-        <Image
-          className="h-5 w-[100px] dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl leading-10 font-semibold tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="bg-foreground text-background flex h-12 w-full items-center justify-center gap-2 rounded-full px-5 transition-colors hover:bg-[#383838] md:w-[158px] dark:hover:bg-[#ccc]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <>
+      <SiteHeader />
+      <main className="flex-1">
+        <section className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:grid-cols-2 md:py-24">
+          <div className="space-y-6">
+            <p className="text-primary text-sm font-semibold">Mandal-Art</p>
+            <h1 className="text-4xl leading-tight font-bold md:text-5xl">
+              81칸으로 그리는
+              <br />
+              나의 목표 지도
+            </h1>
+            <p className="text-muted-foreground text-lg">
+              만다라트는 9×9 표로 하나의 핵심 목표를 8개의 세부 목표와 64개의
+              실천 과제로 쪼개는 목표 설계 기법입니다.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Button asChild size="lg">
+                <Link href={startHref}>시작하기</Link>
+              </Button>
+              {user ? (
+                <Button asChild size="lg" variant="outline">
+                  <Link href="/mandalarts">내 만다라트</Link>
+                </Button>
+              ) : (
+                <Button asChild size="lg" variant="outline">
+                  <Link href="/login">로그인</Link>
+                </Button>
+              )}
+            </div>
+          </div>
+          <div
+            className="border-foreground/70 bg-border mx-auto grid w-full max-w-sm grid-cols-3 gap-px overflow-hidden rounded-xl border-2"
+            aria-hidden
           >
-            <Image
-              className="h-[14px] w-4 dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] md:w-[158px] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+            {preview.map((text, i) => (
+              <div
+                key={text}
+                className={
+                  i === 4
+                    ? "bg-core text-core-foreground flex aspect-square items-center justify-center p-2 text-center font-bold"
+                    : "bg-sub text-sub-foreground flex aspect-square items-center justify-center p-2 text-center font-semibold"
+                }
+              >
+                {text}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="bg-muted/40 border-t">
+          <div className="mx-auto grid max-w-6xl gap-6 px-4 py-16 sm:grid-cols-2 lg:grid-cols-4">
+            {features.map(({ icon: Icon, title, body }) => (
+              <div key={title} className="space-y-2">
+                <Icon className="text-primary size-6" aria-hidden />
+                <h2 className="font-semibold">{title}</h2>
+                <p className="text-muted-foreground text-sm">{body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
-    </div>
+      <footer className="text-muted-foreground border-t py-6 text-center text-xs">
+        © 만다라트
+      </footer>
+    </>
   );
 }
