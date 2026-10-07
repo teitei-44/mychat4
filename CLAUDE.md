@@ -50,4 +50,5 @@
 - **shadcn/ui**: 컴포넌트 소스를 `src/components/ui/`에 직접 두었다(new-york 스타일, `radix-ui` 패키지).
   새 컴포넌트는 `npx shadcn@latest add <name>`으로 추가 가능.
 - **폰트**: Pretendard를 npm 패키지에서 가져와 `next/font/local`로 셀프 호스팅한다(빌드 시 외부 네트워크 불필요).
+- **Supabase 키**: `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`(새 publishable key)를 사용한다. 예전 이름 `NEXT_PUBLIC_SUPABASE_ANON_KEY`도 대체값으로 허용한다.
 - **내보내기**: data URL 대신 Blob URL로 내려받는다(큰 파일·한글 파일명에 안정적).

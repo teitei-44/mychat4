@@ -23,8 +23,11 @@
 
    ```bash
    cp .env.local.example .env.local
-   # NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY 값을 채웁니다
+   # NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY 값을 채웁니다
    ```
+
+   > 값은 Supabase 대시보드 → Project Settings → API Keys의 **Publishable key**(`sb_publishable_...`)입니다.
+   > 예전 방식의 anon key(JWT)를 쓰는 프로젝트라면 `NEXT_PUBLIC_SUPABASE_ANON_KEY`로 넣어도 동작합니다.
 
 4. Supabase 대시보드 → Authentication → URL Configuration
    - Site URL: `http://localhost:3000`
@@ -52,7 +55,7 @@ npm run format     # Prettier
 1. GitHub 저장소를 Vercel에 Import
 2. Project Settings → Environment Variables에 등록
    - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
    - `NEXT_PUBLIC_SITE_URL` = `https://<your-app>.vercel.app`
 3. Supabase → Authentication → URL Configuration
    - Site URL: `https://<your-app>.vercel.app`
