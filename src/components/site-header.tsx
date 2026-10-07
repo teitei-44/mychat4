@@ -9,13 +9,13 @@ export async function SiteHeader() {
   const user = await getCurrentUser();
 
   return (
-    <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur print:hidden">
+    <header className="bg-background/80 sticky top-0 z-40 border-b backdrop-blur print:hidden">
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-2 px-4">
         <Link
           href={user ? "/mandalarts" : "/"}
           className="mr-auto flex items-center gap-2 font-bold"
         >
-          <Grid3x3Icon className="size-5 text-primary" aria-hidden />
+          <Grid3x3Icon className="text-primary size-5" aria-hidden />
           만다라트
         </Link>
         <ThemeToggle />

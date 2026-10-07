@@ -32,8 +32,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 type Props =
-  | { mode: "login"; next?: string; initialError?: string }
-  | { mode: "signup" };
+  { mode: "login"; next?: string; initialError?: string } | { mode: "signup" };
 
 export function AuthForm(props: Props) {
   const isLogin = props.mode === "login";
@@ -56,18 +55,18 @@ export function AuthForm(props: Props) {
           <SignupForm />
         )}
       </CardContent>
-      <CardFooter className="justify-center text-sm text-muted-foreground">
+      <CardFooter className="text-muted-foreground justify-center text-sm">
         {isLogin ? (
           <>
             계정이 없으신가요?
-            <Link href="/signup" className="ml-1 text-primary underline">
+            <Link href="/signup" className="text-primary ml-1 underline">
               회원가입
             </Link>
           </>
         ) : (
           <>
             이미 계정이 있으신가요?
-            <Link href="/login" className="ml-1 text-primary underline">
+            <Link href="/login" className="text-primary ml-1 underline">
               로그인
             </Link>
           </>
@@ -81,14 +80,14 @@ function ResultMessage({ result }: { result: AuthResult | null }) {
   if (!result) return null;
   if (result.error) {
     return (
-      <p role="alert" className="text-sm text-destructive">
+      <p role="alert" className="text-destructive text-sm">
         {result.error}
       </p>
     );
   }
   if (result.message) {
     return (
-      <p role="status" className="text-sm text-primary">
+      <p role="status" className="text-primary text-sm">
         {result.message}
       </p>
     );

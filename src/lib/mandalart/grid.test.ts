@@ -30,7 +30,11 @@ describe("toGrid", () => {
 
   it("핵심 목표는 가운데 블록의 가운데 칸에 있다", () => {
     const cell = grid[CENTER][CENTER];
-    expect(cell).toMatchObject({ kind: "core", value: "핵심", readOnly: false });
+    expect(cell).toMatchObject({
+      kind: "core",
+      value: "핵심",
+      readOnly: false,
+    });
     expect(toRowCol(CENTER, CENTER)).toEqual([4, 4]);
 
     const coreCells = grid.flat().filter((c) => c.kind === "core");
