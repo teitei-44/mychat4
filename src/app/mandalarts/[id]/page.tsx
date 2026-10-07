@@ -7,6 +7,7 @@ import { countFilled, TOTAL_CELLS } from "@/lib/mandalart/mapper";
 import { formatDateTime } from "@/lib/format";
 import { MandalartGrid } from "@/components/mandalart/mandalart-grid";
 import { DeleteDialog } from "@/components/mandalart/delete-dialog";
+import { ExportButtons } from "@/components/mandalart/export-buttons";
 import { Button } from "@/components/ui/button";
 
 type Props = { params: Promise<{ id: string }> };
@@ -46,6 +47,7 @@ export default async function MandalartDetailPage({ params }: Props) {
               수정
             </Link>
           </Button>
+          <ExportButtons title={m.title} data={m} />
           <DeleteDialog id={m.id} title={m.title} />
         </div>
       </div>
